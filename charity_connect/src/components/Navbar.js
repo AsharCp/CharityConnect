@@ -24,15 +24,13 @@ const Navbar = () => {
       lg:bg-green-500
        xl:bg-white'>
         <div className='flex flex-row justify-center items-center'>
-          <img className='m-2 rounded hidden lg:block lg:visible' style={{width:'50px',height:'50px'}} src="/CharityConnect.jpg" alt='Logo'/>
+          <img className='m-2 ml-6 rounded hidden lg:block lg:visible' style={{width:'50px',height:'50px'}} src="/CharityConnect.jpg" alt='Logo'/>
           {showSidebar?
-          <button onClick={handleSidebarClose}><RxCross1 className='sm:visible lg:hidden w-6 mt-3 mx-3 h-6 rounded hover:bg-gray-200'  /></button>
-          :<button onClick={handleSidebarOn}><RiMenuLine className='sm:visible lg:hidden w-6 mt-3 mx-3 h-6 rounded hover:bg-gray-200'  /></button>
+          <button onClick={handleSidebarClose}><RxCross1 className='sm:visible lg:hidden w-6 mt-2 ml-5 mr-2 h-6 rounded hover:bg-gray-200'  /></button>
+          :<button onClick={handleSidebarOn}><RiMenuLine className='sm:visible lg:hidden w-6 mt-2 ml-5 mr-2 h-6 rounded hover:bg-gray-200'  /></button>
           }
-          
-          
-          
-          <p className='text-3xl pt-2 font-bold text-blue-color hover:text-green-700 lg:px-2'>CharityConnect</p>
+
+          <p className='text-3xl pt-1 font-bold text-blue-color hover:text-green-700'>CharityConnect</p>
         </div>
         
         <ul className='invisible flex flex-row justify-end gap-10 mx-10 text-black font-semibold pt-2 text-md lg:visible'>
