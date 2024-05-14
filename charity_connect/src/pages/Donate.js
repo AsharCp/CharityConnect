@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Donate = () => {
+
+  const [showDonateBtn,setShowDonateBtn] = useState(true)
+  const [showForm,setShowForm] = useState(false)
 
   const amount=8000;
   const currency="INR";
@@ -73,9 +76,50 @@ const Donate = () => {
 
   };
 
+  const HandleDonateBtn=()=>{
+    setShowDonateBtn(false)
+    setShowForm(true)
+  }
+  const HandleCancel=()=>{
+    setShowDonateBtn(true)
+    setShowForm(false)
+  }
+
   return (
-      <div>
-        <button onClick={paymentHandler} className='bg-black text-white p-3'>Proceed Payment</button>
+      <div className='flex justify-center flex-col items-center'>
+        <div className='w-10/12 p-5 bg-green-color my-5 rounded flex flex-col justify-between'>
+          <div className='flex flex-col md:flex-row'>
+            <p className='text-3xl font-semibold text-white'>VC Memmorial Educational Scholarship<br/>
+            <span className='text-lg font-normal'>Discover the VC Memorial Scholarship, offered by the Government Engineering College Wayanad, providing invaluable support for students pursuing excellence in engineering education. Seize the opportunity to advance your academic journey with this prestigious scholarship.</span></p>
+            {/* <img src='/scholarship.jpg' alt='Scholarship logo' className='w-11/12 sm:hidden rounded my-2' /> */}
+          </div>
+          {showDonateBtn?<button onClick={HandleDonateBtn} className='bg-white text-green-color font-bold rounded p-3 mt-3 w-32'>Donate Now</button>
+          :<button onClick={HandleCancel} className='bg-red-600 text-white font-bold rounded p-3 w-32 mt-3'>Cancel</button>
+
+          }
+          {showForm?
+          <div className='py-2 my-2 flex flex-col gap-2 items-center'>
+            <input placeholder='Enter Your Name' className='p-2 rounded outline-none font-semibold w-10/12'/>
+            <input placeholder='Enter Your Class' className='p-2 rounded outline-none font-semibold w-10/12'/>
+            <input placeholder='Amount' className='p-2 rounded outline-none font-semibold w-10/12'/>
+            <button onClick={paymentHandler} className='bg-blue-color w-8/12 rounded text-white p-2 font-bold'>Proceed Payment</button>
+           </div>:""
+
+
+          }
+          
+        </div>
+
+        {/* Item2  */}
+
+        <div className='w-10/12 p-5 bg-green-color my-5 rounded flex flex-col justify-between'>
+          <div className='flex flex-col'>
+            <p className='text-3xl font-semibold text-white'>Pain and Paliative Care Fund Collection<br/>
+            <span className='text-lg font-normal'>Pain and paliative, offered by the Government Engineering College Wayanad Mananthavady, providing invaluable support for peoples having low financial background. Seize the opportunity to advance your academic journey with this prestigious care.</span></p>
+            {/* <img src='/scholarship.jpg' alt='Scholarship logo' className='w-11/12 h-52 rounded my-2' /> */}
+          </div>
+          <button className='bg-white font-bold rounded p-3 w-32 mt-3'>Closed!</button>
+        </div>
       </div>
 
   )
