@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+import Axios from 'axios'
 
 const Donate = () => {
 
   const [showDonateBtn,setShowDonateBtn] = useState(true)
   const [showForm,setShowForm] = useState(false)
+  const [name,setName] = useState('')
+  const [category,setCategory] = useState('')
+  const [payAmount,setPayAmount] = useState(0)
 
-  const amount=8000;
+  const amount=payAmount;
   const currency="INR";
   const receiptId="abcd";
 
@@ -45,6 +49,14 @@ const Donate = () => {
           });
           const jsonRes = await validateRes.json();
           console.log(jsonRes)
+
+          if(jsonRes.msg==='success')
+          {
+              Axios.post('http://127.0.0.1:5000/insert',{name,category,payAmount})
+              .then(result => console.log(result))
+              .catch(err => console.log(err))
+            
+          }  
           
       },
       "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
@@ -85,6 +97,19 @@ const Donate = () => {
     setShowForm(false)
   }
 
+  const handleName=(event)=>{
+    setName(event.target.value)
+    console.log(name)
+  }
+  const handleClass=(event)=>{
+    setCategory(event.target.value)
+    console.log(category)
+  }
+  const handleAmount=(event)=>{
+    setPayAmount(event.target.value)
+    console.log(payAmount)
+  }
+
   return (
       <div className='flex justify-center flex-col items-center'>
         <div className='w-10/12 p-5 bg-green-color my-5 rounded flex flex-col justify-between'>
@@ -99,9 +124,9 @@ const Donate = () => {
           }
           {showForm?
           <div className='py-2 my-2 flex flex-col gap-2 items-center'>
-            <input placeholder='Enter Your Name' className='p-2 rounded outline-none font-semibold w-10/12'/>
-            <input placeholder='Enter Your Class' className='p-2 rounded outline-none font-semibold w-10/12'/>
-            <input placeholder='Amount' className='p-2 rounded outline-none font-semibold w-10/12'/>
+            <input placeholder='Enter Your Name' className='p-2 rounded outline-none font-semibold w-10/12' type='text' value={name} onChange={handleName}/>
+            <input placeholder='Enter Your Class' className='p-2 rounded outline-none font-semibold w-10/12' type='text' value={category} onChange={handleClass}/>
+            <input placeholder='Amount' className='p-2 rounded outline-none font-semibold w-10/12' type='text' value={payAmount} onChange={handleAmount} />
             <button onClick={paymentHandler} className='bg-blue-color w-8/12 rounded text-white p-2 font-bold'>Proceed Payment</button>
            </div>:""
 

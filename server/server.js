@@ -3,13 +3,33 @@ const Razorpay = require('razorpay');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 const crypto = require("crypto");
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
 
 const app = express();
 const PORT = process.env.PORT
+app.use(bodyParser.json())
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
+
+const charityModel = require('./models/dataSchema')
+
+// const uri = process.env.DATABASE_URI
+mongoose.connect('mongodb://127.0.0.1:27017/CharityConnect');
+
+app.post('/insert',(req,res)=>{
+    charityModel.create(req.body)
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
+
+})
+
+
+
+
 
 app.post('/order',async (req,res)=>{
     try{
